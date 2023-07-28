@@ -325,6 +325,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
             setrepCount(0f)
         }
     }
+    // this will add audio
     fun playPushupSound() {
         mediaPlayer.start()
     }
