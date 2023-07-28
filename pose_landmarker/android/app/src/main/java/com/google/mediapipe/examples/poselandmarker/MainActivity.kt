@@ -226,6 +226,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                                 if (rep == 1) {
                                     repCount += 0.5f
                                     rep = 0
+
                                     playPushupSound()
                                 }
                             }
