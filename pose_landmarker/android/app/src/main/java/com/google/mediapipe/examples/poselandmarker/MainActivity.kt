@@ -6,7 +6,6 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -26,15 +25,15 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private var azimuthDegrees: Float = 0.0f
     private var pitchDegrees: Float = 0.0f
     private var rollDegrees: Float = 0.0f
-    //    private var rotation: Int = 0
+//    private var rotation: Int = 0
     private lateinit var rotationTextView: TextView
-    var Angle1: Int = 0
-    var Angle2: Int = 0
+     var Angle1: Int = 0
+     var Angle2: Int = 0
     var HipAngle: Int = 0
     private var rep: Int = 0
     private var RepCount: Int = 0
     public val MainMenu = MainMenu()
-    private lateinit var mediaPlayer: MediaPlayer
+
     companion object {
         @JvmStatic
         private var View_selection: Int = 0
@@ -89,7 +88,6 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         rotationSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
         rotationTextView = findViewById(R.id.textView6)
-        mediaPlayer = MediaPlayer.create(this, R.raw.ping)
 
         // Start rotation detection when the app starts
         startDetection()
@@ -138,13 +136,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                                 if (rep == 0) {
                                     repCount += .5f
                                     rep = 1
-                                    playPushupSound()
                                 }
                             } else if (Angle1 >= 45) {
                                 if (rep == 1) {
                                     repCount += 0.5f
                                     rep = 0
-                                    playPushupSound()
                                 }
                             }
                             //                        } //else if (View_selection == 2) { ///Side view
@@ -166,13 +162,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                                 if (rep == 0) {
                                     repCount += .5f
                                     rep = 1
-                                    playPushupSound()
                                 }
                             } else if (Angle1 <= 45) {
                                 if (rep == 1) {
                                     repCount += 0.5f
                                     rep = 0
-                                    playPushupSound()
                                 }
                             }
                             RepCount = repCount.toInt() // 1
@@ -181,13 +175,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                                 if (rep == 0) {
                                     repCount += .5f
                                     rep = 1
-                                    playPushupSound()
                                 }
                             } else if (Angle1 <= 135) {
                                 if (rep == 1) {
                                     repCount += 0.5f
                                     rep = 0
-                                    playPushupSound()
                                 }
                             }
                             RepCount = repCount.toInt()// 2
@@ -196,13 +188,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                                 if (rep == 0) {
                                     repCount += .5f
                                     rep = 1
-                                    playPushupSound()
                                 }
                             } else if (Angle1 >= 135) {
                                 if (rep == 1) {
                                     repCount += 0.5f
                                     rep = 0
-                                    playPushupSound()
                                 }
                             }
                             RepCount = repCount.toInt()// 3
@@ -219,13 +209,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                                 if (rep == 0) {
                                     repCount += .5f
                                     rep = 1
-                                    playPushupSound()
                                 }
                             } else if (HipAngle >= 45) {
                                 if (rep == 1) {
                                     repCount += 0.5f
                                     rep = 0
-                                    playPushupSound()
                                 }
                             }
                             //                        } //else if (View_selection == 2) { ///Side view
@@ -247,13 +235,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                                 if (rep == 0) {
                                     repCount += .5f
                                     rep = 1
-                                    playPushupSound()
                                 }
                             } else if (HipAngle <= 45) {
                                 if (rep == 1) {
                                     repCount += 0.5f
                                     rep = 0
-                                    playPushupSound()
                                 }
                             }
                             RepCount = repCount.toInt() // 1
@@ -262,13 +248,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                                 if (rep == 0) {
                                     repCount += .5f
                                     rep = 1
-                                    playPushupSound()
                                 }
                             } else if (HipAngle <= 135) {
                                 if (rep == 1) {
                                     repCount += 0.5f
                                     rep = 0
-                                    playPushupSound()
                                 }
                             }
                             RepCount = repCount.toInt()// 2
@@ -277,13 +261,11 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                                 if (rep == 0) {
                                     repCount += .5f
                                     rep = 1
-                                    playPushupSound()
                                 }
                             } else if (HipAngle >= 135) {
                                 if (rep == 1) {
                                     repCount += 0.5f
                                     rep = 0
-                                    playPushupSound()
                                 }
                             }
                             RepCount = repCount.toInt()// 3
@@ -314,7 +296,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         val b = view as Button
         if(Start == true)
         {
-            b.text = "Stop"
+             b.text = "Stop"
             setrepCount(0f)
         }
         else
@@ -324,9 +306,5 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
     }
 
-
-    fun playPushupSound() {
-        mediaPlayer.start()
-    }
 
 }
