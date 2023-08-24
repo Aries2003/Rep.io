@@ -48,9 +48,9 @@ public class MainMenu extends AppCompatActivity {
     public void Log(View view)
     {
         // Do something in response to button click
-        Toast.makeText(this, "Feature Coming Soon", Toast.LENGTH_SHORT).show();
-//        MainActivity.setexcerise_selection(4);
-//        OurText.setText(""+MainActivity.getexcerise_selection() );
+//        Toast.makeText(this, "Feature Coming Soon", Toast.LENGTH_SHORT).show();
+        MainActivity.setexcerise_selection(4);
+        OurText.setText(""+MainActivity.getexcerise_selection() );
 //        ViewSelector();
     }
     public void ViewSelector(){
