@@ -31,8 +31,8 @@ public class MainMenu extends AppCompatActivity {
     }
     public void Squat(View view)
     {
-        // Do something in response to button click
-//        Toast.makeText(this, "Feature Coming Soon", Toast.LENGTH_SHORT).show();
+        //Do something in response to button click
+       //Toast.makeText(this, "Feature Coming Soon", Toast.LENGTH_SHORT).show();
         MainActivity.setexcerise_selection(2);
         OurText.setText(""+MainActivity.getexcerise_selection() );
         ViewSelector();
@@ -40,10 +40,10 @@ public class MainMenu extends AppCompatActivity {
     public void DeadLift(View view)
     {
         // Do something in response to button click
-        Toast.makeText(this, "Feature Coming Soon", Toast.LENGTH_SHORT).show();
-//        MainActivity.setexcerise_selection(3);
-//        OurText.setText(""+MainActivity.getexcerise_selection() );
-//        ViewSelector();
+      //  Toast.makeText(this, "Feature Coming Soon", Toast.LENGTH_SHORT).show();
+        MainActivity.setexcerise_selection(3);
+        OurText.setText(""+MainActivity.getexcerise_selection() );
+        ViewSelector();
     }
     public void Log(View view)
     {
