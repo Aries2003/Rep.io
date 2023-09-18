@@ -23,6 +23,8 @@ public class ViewSelection extends AppCompatActivity {
             setContentView(R.layout.activity_view_selection);
         else if (MainActivity.getexcerise_selection()==2)
             setContentView(R.layout.squat_view);
+        else if (MainActivity.getexcerise_selection()==3)
+            setContentView(R.layout.deadlift_view);
 
         OurText= findViewById(R.id.View_selection_var) ;
 
@@ -37,10 +39,10 @@ public class ViewSelection extends AppCompatActivity {
     }
     public void SideView(View view)
     {
-        Toast.makeText(this, "Feature Coming Soon", Toast.LENGTH_SHORT).show();
-//        MainActivity.setViewSelection(2);
-//        OurText.setText(""+MainActivity.getViewSelection());
-//        ViewSelector();
+        //Toast.makeText(this, "Feature Coming Soon", Toast.LENGTH_SHORT).show();
+        MainActivity.setViewSelection(2);
+        OurText.setText(""+MainActivity.getViewSelection());
+        ViewSelector();
     }
     public void ViewSelector(){
 

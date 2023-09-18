@@ -51,6 +51,7 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
     public var angle3 = 0
     public var angle4 = 0
     public var HipAngle = 0
+    public var L_HipAngle = 0
 
     // Using application context
     val mainActivity = context as MainActivity
@@ -245,9 +246,40 @@ class OverlayView(context: Context?, attrs: AttributeSet?) :
                 {
                     HipAngle = 360 - HipAngle
                 }
+
 //                              by me : for singular landmark selection and giving output
-                mainActivity.HipAngle = HipAngle
-                canvas.drawText(HipAngle.toString(),
+//                mainActivity.HipAngle = HipAngle
+//                canvas.drawText(HipAngle.toString(),
+//                    poseLandmarkerResult.landmarks().get(0).get(24).x() * imageWidth * scaleFactor,
+//                    poseLandmarkerResult.landmarks().get(0).get(24).y() * imageHeight * scaleFactor,textPaint)
+                //RHip
+//                by me : get 3 landmarks and calculate the angle formed in the middle landmark
+
+                val L_shoulder = doubleArrayOf(
+                    (poseLandmarkerResult.landmarks().get(0).get(12).x() * imageWidth * scaleFactor).toDouble(),
+                    (poseLandmarkerResult.landmarks().get(0).get(12).y() * imageHeight * scaleFactor).toDouble(),
+                    (poseLandmarkerResult.landmarks().get(0).get(12).z() * imageHeight * scaleFactor).toDouble())// First coord
+                val L_hip_Deep = doubleArrayOf(
+                    (poseLandmarkerResult.landmarks().get(0).get(24).x() * imageWidth * scaleFactor).toDouble(),
+                    (poseLandmarkerResult.landmarks().get(0).get(24).y() * imageHeight * scaleFactor).toDouble(),
+                    (poseLandmarkerResult.landmarks().get(0).get(24).z() * imageHeight * scaleFactor).toDouble()) // Second coord
+                val L_knee = doubleArrayOf(
+                    (poseLandmarkerResult.landmarks().get(0).get(26).x() * imageWidth * scaleFactor).toDouble(),
+                    (poseLandmarkerResult.landmarks().get(0).get(26).y() * imageHeight * scaleFactor).toDouble(),
+                    (poseLandmarkerResult.landmarks().get(0).get(26).z() * imageHeight * scaleFactor).toDouble())//Third coord
+
+                val radians6 =  atan2(L_knee[1] - L_hip_Deep[1], L_knee[0] - L_hip_Deep[0])
+                -atan2(L_shoulder[1] - L_hip_Deep[1], L_shoulder[0] - L_hip_Deep[0])
+
+                L_HipAngle = (abs(radians3) * 180.0 / PI).toInt()
+                if (L_HipAngle > 180)
+                {
+                    L_HipAngle = 360 - L_HipAngle
+                }
+
+//                              by me : for singular landmark selection and giving output
+                mainActivity.L_HipAngle = L_HipAngle
+                canvas.drawText(L_HipAngle.toString(),
                     poseLandmarkerResult.landmarks().get(0).get(24).x() * imageWidth * scaleFactor,
                     poseLandmarkerResult.landmarks().get(0).get(24).y() * imageHeight * scaleFactor,textPaint)
 

@@ -7,6 +7,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -25,13 +26,15 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
     private var azimuthDegrees: Float = 0.0f
     private var pitchDegrees: Float = 0.0f
     private var rollDegrees: Float = 0.0f
-//    private var rotation: Int = 0
+    //    private var rotation: Int = 0
     private lateinit var rotationTextView: TextView
-     var Angle1: Int = 0
-     var Angle2: Int = 0
+    var Angle1: Int = 0
+    var Angle2: Int = 0
     var HipAngle: Int = 0
     private var rep: Int = 0
     private var RepCount: Int = 0
+    var L_HipAngle : Int = 0
+
     public val MainMenu = MainMenu()
 
     companion object {
@@ -79,6 +82,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         }
 
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -274,6 +278,79 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
                         // Update the rotation value on the TextView
                         rotationTextView.text = "Rep $RepCount"
                     }
+                } else if (excerise_selection == 3) {                   //deadlift
+                    if (View_selection == 2) {                          // side view
+                        if (pitchDegrees > 0.00f && rollDegrees > 0) {// LandScape Camera Right side
+                            //side view squat
+                            if (L_HipAngle <= 94) {
+                                if (rep == 0) {
+                                    repCount += 0.5f
+                                    rep = 1
+                                }
+                            } else if (L_HipAngle >= 94) {
+                                if (rep == 1) {
+                                    repCount += 0.5f
+                                    rep = 0
+                                }
+                            }
+                            //                        } //else if (View_selection == 2) { ///Side view
+                            //                        if (Angle1 <= 135) {
+                            //                            if (rep == 0) {
+                            //                                repCount += .5f
+                            //                                rep = 1
+                            //                            }
+                            //                        } else if (Angle1 >= 135) {
+                            //                            if (rep == 1) {
+                            //                                repCount += 0.5f
+                            //                                rep = 0
+                            //                            }
+                            //                        }
+                            //                    }
+                            RepCount = repCount.toInt() // 0
+                        } else if (pitchDegrees < 0 && rollDegrees < 0) {// Portrait
+                            if (L_HipAngle >= 100) {
+                                if (rep == 0) {
+                                    repCount += .5f
+                                    rep = 1
+                                }
+                            } else if (L_HipAngle <= 100) {
+                                if (rep == 1) {
+                                    repCount += 0.5f
+                                    rep = 0
+                                }
+                            }
+                            RepCount = repCount.toInt() // 1
+                        } else if (pitchDegrees > 0 && pitchDegrees < 5 && rollDegrees < 0) { // LandScape Camera Left Side
+                            if (L_HipAngle >= 135) {
+                                if (rep == 0) {
+                                    repCount += .5f
+                                    rep = 1
+                                }
+                            } else if (L_HipAngle <= 135) {
+                                if (rep == 1) {
+                                    repCount += 0.5f
+                                    rep = 0
+                                }
+                            }
+                            RepCount = repCount.toInt()// 2
+                        } else if (pitchDegrees > 10 && rollDegrees < 0) {// Inverse Portrait
+                            if (L_HipAngle <= 135) {
+                                if (rep == 0) {
+                                    repCount += .5f
+                                    rep = 1
+                                }
+                            } else if (L_HipAngle >= 135) {
+                                if (rep == 1) {
+                                    repCount += 0.5f
+                                    rep = 0
+                                }
+                            }
+                            RepCount = repCount.toInt()// 3
+                        }
+
+                        // Update the rotation value on the TextView
+                        rotationTextView.text = "Rep $RepCount"
+                    }
                 }
             }
 //            if(Start == true)
@@ -296,7 +373,7 @@ class MainActivity : AppCompatActivity(), SensorEventListener {
         val b = view as Button
         if(Start == true)
         {
-             b.text = "Stop"
+            b.text = "Stop"
             setrepCount(0f)
         }
         else
